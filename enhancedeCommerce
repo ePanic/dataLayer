@@ -1,8 +1,8 @@
 <script>
 dataLayer.push({
-  'event': 'transaction',
-  'ecommerce': {
-    'purchase': {
+  'event': 'transaction', // can be used as a custom event trigger in GTM to send this data as an event
+  'ecommerce': {  //ecommerce object
+    'purchase': { //Purchase measurement object
       'actionField': {
         'id': 'T12345',        // Transaction ID. Required           
         'affiliation': 'Online Store',
