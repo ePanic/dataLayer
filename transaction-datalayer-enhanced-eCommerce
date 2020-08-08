@@ -1,0 +1,37 @@
+<script>
+    dataLayer.push({
+        'event': 'transaction', // can be used as a custom event trigger in GTM to send this data as to GA
+        'ecommerce': {                    //eCommerce object
+            'purchase': {                //Purchase measurement object inside of eCommerce Object
+                'actionField': {
+                    'id': '12125',       // Transaction ID. Required           
+                    'affiliation': 'Measure Marketer Store',
+                    'revenue': '254.43', // Total transaction value (incl. tax and shipping)
+                    'tax': '9.90',
+                    'shipping': '13.99',
+                    'coupon': 'Christmas_Offer'
+                },
+                'products': [{ // List of productFieldObjects. Each object contains details of the product and together we store them in a Products Array.
+                        'name': 'Measure Tee', // Name or ID is required.
+                        'id': '12145',
+                        'price': '45.35',
+                        'brand': 'Measure Marketer',
+                        'category': 'Tee Shirts',
+                        'variant': 'Black',
+                        'quantity': 1,
+                        'coupon': '' // Optional fields may be omitted or set to empty string.
+                    }, {
+                        'name': 'Tag Me, Track Me Tee',
+                        'id': '12196',
+                        'price': '55.65',
+                        'brand': 'Measure Marketer',
+                        'category': 'Tee Shirts',
+                        'variant': 'Grey',
+                        'quantity': 1
+                    }]  //expand this array if more product exists
+            }
+        }
+    });
+</script>
+
+//Each product object is created by calling the corresponsing class. Object is an instance of the class.
