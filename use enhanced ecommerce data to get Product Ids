@@ -1,0 +1,12 @@
+// works only when you implemented enhanced ecommerce tracking on website.
+
+function(){  
+  var prods = {{DataLayer - Ecommerce}}.purchase.products; // get all products from the purchase object in GTM with DLV
+  var skus = [];
+  var i; 
+  if (!prods) { return; } 
+  for (i = 0; i < prods.length; i++) {
+    if (prods[i].id) { skus.push(prods[i].id); } 
+  } 
+  return skus.join(','); // join the values in array with ,'s
+ }
