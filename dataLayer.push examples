@@ -1,0 +1,101 @@
+#1 STANDARD GTM DATA LAYER PUSH SYNTAX - source: mixedanalytics.com
+The standard syntax for a GTM data layer push includes an event key and sets of key-value pairs, like this:
+
+window.dataLayer = window.dataLayer || [];
+dataLayer.push({
+  'event' : 'trackEvent',
+  'pageType' : 'Blog',
+  'userID' : '12345',
+  'loginStatus' : 'logged in' 
+});
+
+/* 
+NOTE: Note: while event keys aren’t strictly necessary for a data layer push, every tag in GTM needs an event key to trigger it. 
+If you push dimensions without an event key, you can’t access the dimension values at that current state — they will be inaccessible 
+to GTM until the next event key gets set. So as a best practice, always include an event key on every data layer push.
+*/
+
+
+#2 GTM DATA LAYER PUSH WITH ARRAY
+In some cases, the value of your data layer key will be an array, rather than a single value. 
+Here’s an example where you’re marking a page with multiple categories:
+
+window.dataLayer = window.dataLayer || []
+window.dataLayer.push({
+  'event':'trackEvent',
+  'pageType' : 'Blog',
+  'userID' : '12345', 
+  'loginStatus' : 'logged in', 
+  'pageCategories':['Marketing','Measurement','Implementation'];
+  });
+  
+  
+#3 GTM DATA LAYER PUSH WITH NESTED KEY-VALUE PAIRS
+Getting a little more advanced, you will sometimes also want to pass in nested key-value pairs into your data layer. 
+Probably the most common example of this is when you implement the various Google Analytics 
+Enhanced Ecommerce data layer pushes for GTM, as described here. In this example snippet for tracking cart adds, 
+there’s an e-commerce object that contains a products key. Within this product key, you can see key-value pairs 
+for product name, product ID, product price, product brand, product category, product variant, and product quantity:
+
+window.dataLayer = window.dataLayer || []; 
+dataLayer.push({
+  'event': 'addToCart',
+  'ecommerce': {
+    'currencyCode': 'EUR',
+    'add': {                                
+      'products': [{                        
+        'name': 'Triblend Android T-Shirt',
+        'id': '12345',
+        'price': '15.25',
+        'brand': 'Google',
+        'category': 'Apparel',
+        'variant': 'Gray',
+        'quantity': 1
+       }]
+    }
+  }
+});
+
+4 GTM DATA LAYER PUSH WITH NESTED ARRAYS
+I’ll also include one more case, for when you want to go even deeper.  
+In this example, imagine you are tracking content on your site, and your content has 
+multiple top-level categories as well as sub-categories. This would be the syntax for
+pushing a ‘pageCategories’ key that contains multiple category values, which are then further broken down by sub-category.
+
+window.dataLayer = window.dataLayer || []
+window.dataLayer.push({
+  'event':'trackEvent',
+  'pageType' : 'Blog',
+  'userID' : '12345', 
+  'loginStatus' : 'logged in', 
+  'pageCategories':[{
+    "Marketing":["Facebook Ads","Google Ads","Mailchimp"],
+    "Measurement":["Google Analytics"],
+    "Implementation":["FB Pixel","GTM"]
+}]
+});
+  
+ 
+QUICK NOTE
+All of the above examples show the final, resolved output of the code you’re using to 
+populate the data layer push. The actual code will usually contain variables, like this:
+
+window.dataLayer = window.dataLayer || []; 
+dataLayer.push({
+  'event': 'addToCart',
+  'ecommerce': {
+    'currencyCode': 'EUR',
+    'add': {                                
+      'products': [{                        
+        'name': productObj.name,
+        'id': productObj.id,
+        'price': productObj.price,
+        'brand': productObj.brand,
+        'category': productObj.cat,
+        'variant': productObj.variant,
+        'quantity': productObj.quantity
+       }]
+    }
+  }
+});
+  
